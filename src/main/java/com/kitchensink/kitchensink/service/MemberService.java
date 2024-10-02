@@ -4,7 +4,6 @@ import com.kitchensink.kitchensink.entity.Member;
 import com.kitchensink.kitchensink.exception.MemberEmailExistsException;
 import com.kitchensink.kitchensink.exception.MemberNotFoundException;
 import com.kitchensink.kitchensink.repository.MemberRepository;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
