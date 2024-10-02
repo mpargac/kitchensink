@@ -1,6 +1,7 @@
 package com.kitchensink.kitchensink.service;
 
 import com.kitchensink.kitchensink.entity.Member;
+import com.kitchensink.kitchensink.exception.MemberEmailExistsException;
 import com.kitchensink.kitchensink.exception.MemberNotFoundException;
 import com.kitchensink.kitchensink.repository.MemberRepository;
 import jakarta.validation.Valid;
@@ -16,11 +17,14 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
-    public Member createMember(Member member) {
-        return memberRepository.save(member);
+    public void createMember(Member member) {
+        if (memberRepository.existsByEmail(member.getEmail())) {
+            throw new MemberEmailExistsException();
+        }
+        memberRepository.save(member);
     }
 
-    public Member getMemberById(Long id) {
+    public Member getMemberById(String id) {
         return memberRepository.findById(id).orElseThrow(MemberNotFoundException::new);
     }
 

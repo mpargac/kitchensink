@@ -9,6 +9,7 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 
@@ -18,7 +19,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Member {
 
     @Id
-    private Long id;
+    private String id;
 
     @NotNull
     @Size(min = 1, max = 25)
@@ -28,6 +29,7 @@ public class Member {
     @NotNull
     @NotEmpty
     @Email
+    @Indexed(unique = true)
     private String email;
 
     @NotNull

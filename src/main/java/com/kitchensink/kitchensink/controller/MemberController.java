@@ -2,19 +2,19 @@ package com.kitchensink.kitchensink.controller;
 
 import com.kitchensink.kitchensink.entity.Member;
 import com.kitchensink.kitchensink.service.MemberService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Validated
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/rest/members")
@@ -23,12 +23,13 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping
-    public ResponseEntity<Member> addMember(Member member) {
-        return ResponseEntity.ok(memberService.createMember(member));
+    public ResponseEntity<Void> addMember(@Valid @RequestBody Member member) {
+        memberService.createMember(member);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Member> getMemberById(@PathVariable Long id) {
+    public ResponseEntity<Member> getMemberById(@PathVariable String id) {
         return ResponseEntity.ok(memberService.getMemberById(id));
     }
 

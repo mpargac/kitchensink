@@ -16,7 +16,7 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        memberRepository.save(new Member(0L, "John Smith", "john.smith@mailinator.com", "2125551212"));
+        memberRepository.save(new Member("0", "John Smith", "john.smith@mailinator.com", "2125551212"));
         log.info("Data created");
     }
 }
