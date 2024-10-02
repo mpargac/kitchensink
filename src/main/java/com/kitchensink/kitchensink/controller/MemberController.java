@@ -29,8 +29,8 @@ public class MemberController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Member> getMemberById(@PathVariable String id) {
-        return ResponseEntity.ok(memberService.getMemberById(id));
+    public ResponseEntity<Member> getMemberByExtId(@PathVariable Long id) {
+        return ResponseEntity.ok(memberService.getMemberByExtId(id));
     }
 
     @GetMapping

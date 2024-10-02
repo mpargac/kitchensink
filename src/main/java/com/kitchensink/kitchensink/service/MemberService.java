@@ -23,8 +23,8 @@ public class MemberService {
         memberRepository.save(member);
     }
 
-    public Member getMemberById(String id) {
-        return memberRepository.findById(id).orElseThrow(MemberNotFoundException::new);
+    public Member getMemberByExtId(Long id) {
+        return memberRepository.findByExtId(id).orElseThrow(MemberNotFoundException::new);
     }
 
     public List<Member> getAllMembers(Sort sort) {

@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -14,12 +15,16 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 
 @Data
-@AllArgsConstructor
+@Builder
 @Document("members")
 public class Member {
 
     @Id
     private String id;
+
+    @NotNull
+    @Indexed(unique = true)
+    private Long extId;
 
     @NotNull
     @Size(min = 1, max = 25)
