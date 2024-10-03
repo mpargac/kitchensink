@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Member Registration</title>
+</head>
+<body>
+<div align="center">
+    <h1>Member Registration</h1>
+    <form action="#" th:action="@{/}" method="post" th:object="${member}">
+        <label>Name:</label>
+        <input type="text" th:field="*{name}" /><br/>
+
+        <label>E-mail:</label>
+        <input type="text" th:field="*{email}" /><br/>
+
+        <label>Phone #:</label>
+        <input type="text" th:field="*{phoneNumber}" /><br/>
+
+        <button type="submit">Register</button>
+    </form>
+
+    <h2>Members</h2>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone #</th>
+            <th>REST URL</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="member : ${members}">
+            <td><span th:text="${member.id}">Id</span></td>
+            <td><span th:text="${member.name}">Name</span></td>
+            <td><span th:text="${member.email}">Email</span></td>
+            <td><span th:text="${member.phoneNumber}">Phone</span></td>
+            <td><a th:href="@{'rest/members/' + ${member.id}}"><span th:text="'rest/members/' + ${member.id}"/></a></td>
+        </tr>
+        <tr>
+            <td colspan="5">REST URL for all members: <a th:href="@{'rest/members'}"><span th:text="'rest/members'"/></a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
