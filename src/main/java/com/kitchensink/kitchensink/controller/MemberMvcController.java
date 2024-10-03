@@ -2,16 +2,20 @@ package com.kitchensink.kitchensink.controller;
 
 import com.kitchensink.kitchensink.dto.MemberDTO;
 import com.kitchensink.kitchensink.service.MemberService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
+@Slf4j
 @RequiredArgsConstructor
 @Controller
 public class MemberMvcController {
@@ -29,12 +33,23 @@ public class MemberMvcController {
     }
 
     @PostMapping
-    public String submitForm(@ModelAttribute("member") MemberDTO member, Model model) {
-        System.out.println(member);
+    public String submitForm(@Valid @ModelAttribute("member") MemberDTO member,
+                             BindingResult bindingResult,
+                             Model model) {
+        log.info(member.toString());
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("members", getAllMembers());
+            return "index";
+        }
+
         memberService.createMember(member);
 
-        List<MemberDTO> members = memberService.getAllMembers(Sort.by(Sort.Direction.ASC, "name"));
-        model.addAttribute("members", members);
+        model.addAttribute("members", getAllMembers());
         return "index";
+    }
+
+    private List<MemberDTO> getAllMembers() {
+        return memberService.getAllMembers(Sort.by(Sort.Direction.ASC, "name"));
     }
 }
