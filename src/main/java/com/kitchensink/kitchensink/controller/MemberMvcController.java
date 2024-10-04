@@ -24,10 +24,10 @@ public class MemberMvcController {
 
     @GetMapping
     public String showForm(Model model) {
-        List<MemberDTO> members = memberService.getAllMembers(Sort.by(Sort.Direction.ASC, "name"));
+        List<MemberDTO> members = memberService.getAllMembers(Sort.by(Sort.Direction.ASC, "id"));
         model.addAttribute("members", members);
 
-        MemberDTO member = new MemberDTO();
+        MemberDTO member = MemberDTO.builder().build();
         model.addAttribute("member", member);
         return "index";
     }
