@@ -17,4 +17,6 @@ public interface MemberRepository extends MongoRepository<Member, String> {
     boolean existsByExtId(Long extId);
 
     Member findTopByOrderByExtIdDesc();
+
+    void deleteByExtId(Long extId);
 }

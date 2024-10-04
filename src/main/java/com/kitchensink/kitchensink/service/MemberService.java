@@ -39,4 +39,11 @@ public class MemberService {
                 .map(memberMapper::entityToDto)
                 .toList();
     }
+
+    public void deleteMemberByExtId(Long id) {
+        if (!memberRepository.existsByExtId(id)) {
+            throw new MemberNotFoundException();
+        }
+        memberRepository.deleteByExtId(id);
+    }
 }

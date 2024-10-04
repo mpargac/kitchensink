@@ -80,7 +80,8 @@ Web application for listing all members and registering new members can be acces
 http://localhost:8081/kitchensink
 
 ## REST API
-The application exposes a REST API for managing members. The following endpoints are available for CRUD operations:
+The application exposes a REST API for managing members: http://localhost:8081/kitchensink/rest/members 
+The following endpoints are available for CRUD operations:
 
 | HTTP method | Endpoint                       | Description                       |
 | ----------- | ------------------------------ | --------------------------------- |
