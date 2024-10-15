@@ -23,8 +23,8 @@ Simple web page using Spring Web MVC and Thymeleaf. Main functionality are:
 Exposes CRUD operations for member management.
 - **Create:** Add new member.
 - **Read:** Retrieve details of all or individual members.
-- **Update:** Modify existing member details.
 - **Delete:** Remove members from the system.
+
 DTO Conversion using Mapstruct: Ensures clean separation between the database layer (entities) and the API/web layers (DTOs), simplifying data handling.
 
 ## Prerequisites
@@ -80,7 +80,8 @@ Web application for listing all members and registering new members can be acces
 http://localhost:8081/kitchensink
 
 ## REST API
-The application exposes a REST API for managing members: http://localhost:8081/kitchensink/rest/members 
+The application exposes a REST API for managing members: 
+http://localhost:8081/kitchensink/rest/members 
 The following endpoints are available for CRUD operations:
 
 | HTTP method | Endpoint                       | Description                       |
