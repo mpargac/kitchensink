@@ -1,18 +1,13 @@
 package com.kitchensink.kitchensink.controller;
 
 import com.kitchensink.kitchensink.dto.MemberDTO;
+import com.kitchensink.kitchensink.dto.PartialUpdateMemberDTO;
 import com.kitchensink.kitchensink.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,9 +19,8 @@ public class MemberRestController {
     private final MemberService memberService;
 
     @PostMapping
-    public ResponseEntity<Void> addMember(@Valid @RequestBody MemberDTO member) {
-        memberService.createMember(member);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<MemberDTO> addMember(@Valid @RequestBody MemberDTO member) {
+        return ResponseEntity.ok(memberService.createMember(member));
     }
 
     @GetMapping("/{id}")
@@ -43,6 +37,12 @@ public class MemberRestController {
     public ResponseEntity<Void> deleteMember(@PathVariable Long id) {
         memberService.deleteMemberByExtId(id);
         return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<MemberDTO> partialUpdateMember(@PathVariable Long id,
+                                                         @Valid @RequestBody PartialUpdateMemberDTO member) {
+        return ResponseEntity.ok(memberService.updateMember(id, member));
     }
 
 }
