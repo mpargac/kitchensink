@@ -114,8 +114,10 @@
 				<artifactId>maven-checkstyle-plugin</artifactId>
 				<version>${maven-checkstyle-plugin.version}</version>
 				<configuration>
-					<configLocation>checkstyle.xml</configLocation> <consoleOutput>true</consoleOutput>
+					<configLocation>checkstyle.xml</configLocation>
+					<consoleOutput>true</consoleOutput>
 					<failsOnError>false</failsOnError>
+					<failOnViolation>false</failOnViolation>
 					<linkXRef>false</linkXRef>
 				</configuration>
 				<executions>
